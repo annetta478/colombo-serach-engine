@@ -1,0 +1,38 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    username: root
+    password: toor
+    url: jdbc:mysql://localhost:3306/search_engine?useSSL=false&requireSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf-8
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+      show-sql: true
+
+logging.level.org.hibernate.SQL: DEBUG
+logging.level.org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+jsoup-settings:
+  userAgent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0
+  referrer: https://yandex.com/
+
+search-settings:
+  lower-filter-score: 0.25
+  upper-filter-score: 1.00
+  max-snippet-length: 300
+  max-lemma-distance: 150
+  context-length: 20
+
+indexing-settings:
+  thread-sleep-time: 1 #delta in ms between one http request and another
+  number-of-attempts: 3 #for each attempt the delta time is multiplied by the number of attempts
+  sites:
+    - url: https://www.cossa.ru/
+      name: cossa.ru
+    - url: https://habr.com/
+      name: habr.com
